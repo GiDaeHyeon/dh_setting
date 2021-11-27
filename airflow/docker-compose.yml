@@ -9,6 +9,13 @@ services:
     volumes:
       - /path/to/airflow-persistence:/bitnami
 
+  redis:
+    image: 'bitnami/redis:latest'
+	environment:
+	  - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+	  - ~/redis:/bitmami
+
   airflow-worker:
     image: bitnami/airflow-worker:latest
     environment:
@@ -16,10 +23,11 @@ services:
 #- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
 #- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
       - AIRFLOW_DATABASE_NAME=airflow_practice
       - AIRFLOW_DATABASE_USERNAME=username
       - AIRFLOW_DATABASE_PASSWORD=password
-      - AIRFLOW_LOAD_EXAMPLES=yes
+      - AIRFLOW_LOAD_EXAMPLES=no
     volumes:
       - /path/to/airflow-persistence:/bitnami
 
@@ -29,10 +37,11 @@ services:
 #- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
 #- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
       - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=airflow
       - AIRFLOW_DATABASE_NAME=airflow_practice
       - AIRFLOW_DATABASE_USERNAME=username
       - AIRFLOW_DATABASE_PASSWORD=password
-      - AIRFLOW_LOAD_EXAMPLES=yes
+      - AIRFLOW_LOAD_EXAMPLES=no
     volumes:
       - /path/to/airflow-persistence:/bitnami
 

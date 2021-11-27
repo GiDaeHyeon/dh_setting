@@ -1,4 +1,4 @@
 sudo apt update -y
-sudo apt install vim
+sudo apt install -y vim
 
 cp .vimrc ~/

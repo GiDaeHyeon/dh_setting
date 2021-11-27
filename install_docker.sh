@@ -19,3 +19,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose -version
 
+sudo usermod -aG docker $1
+
