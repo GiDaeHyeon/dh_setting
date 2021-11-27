@@ -1,0 +1,10 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Description",
+	"Resources": {},
+	"Parameters": {},
+	"Mappings": {},
+	"Conditions": {},
+	"Metadata": {},
+	"Outputs": {}
+}
