@@ -6,15 +6,11 @@ services:
       - POSTGRESQL_DATABASE=airflow_practice
       - POSTGRESQL_USERNAME=database_username
       - POSTGRESQL_PASSWORD=database_password
-    volumes:
-      - /path/to/airflow-persistence:/bitnami
 
   redis:
     image: 'bitnami/redis:latest'
 	environment:
 	  - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-	  - ~/redis:/bitmami
 
   airflow-worker:
     image: bitnami/airflow-worker:latest
