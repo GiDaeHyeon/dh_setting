@@ -1,0 +1,54 @@
+version: '3'
+services:
+  postgresql:
+    image: 'bitnami/postgresql:latest'
+    environment:
+      - POSTGRESQL_DATABASE=airflow_practice
+      - POSTGRESQL_USERNAME=username
+      - POSTGRESQL_PASSWORD=password
+    volumes:
+      - /path/to/airflow-persistence:/bitnami
+
+  airflow-worker:
+    image: bitnami/airflow-worker:latest
+    environment:
+# Airflow 보안 관련 키
+#- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+#- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_DATABASE_NAME=airflow_practice
+      - AIRFLOW_DATABASE_USERNAME=username
+      - AIRFLOW_DATABASE_PASSWORD=password
+      - AIRFLOW_LOAD_EXAMPLES=yes
+    volumes:
+      - /path/to/airflow-persistence:/bitnami
+
+  airflow-scheduler:
+    image: bitnami/airflow-scheduler:latest
+    environment:
+#- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+#- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_DATABASE_NAME=airflow_practice
+      - AIRFLOW_DATABASE_USERNAME=username
+      - AIRFLOW_DATABASE_PASSWORD=password
+      - AIRFLOW_LOAD_EXAMPLES=yes
+    volumes:
+      - /path/to/airflow-persistence:/bitnami
+
+  airflow:
+    image: bitnami/airflow:latest
+    environment:
+#- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+#- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_DATABASE_NAME=airflow_practice
+      - AIRFLOW_DATABASE_USERNAME=username
+      - AIRFLOW_DATABASE_PASSWORD=password
+      - AIRFLOW_PASSWORD=airflow_password
+      - AIRFLOW_USERNAME=airflow_username
+      - AIRFLOW_EMAIL=user@example.com
+    ports:
+      - '8080:8080'
+    volumes:
+      - /path/to/airflow-persistence:/bitnami
