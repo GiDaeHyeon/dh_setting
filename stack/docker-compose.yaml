@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - /db-data/postgres/initdb:/docker-entrypoint-initdb.d:ro
+      - /db-data/postgres/data:/var/lib/postgresql/data
+    networks:
+      - backend
+  
+  mongodb:
+    image: mongo:6.0.3
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_DATABASE: admin
+      MONGO_USERNAME: ${MONGO_USERNAME_FILE}
+      MONGO_PASSWORD: ${MONGO_PASSWORD_FILE}
+      MONGO_DATABASE: cases
+    volumes:
+      - /db-data/mongo/initdb:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - /db-data/mongo/data:/data/db
+    networks:
+      - backend
+
+networks:
+  backend:
+  
